@@ -83,4 +83,4 @@ Answer: In the backend, some new endpoints need to be created. The categories ar
 
 ## 📝 License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/zKriguer/products-erp/blob/main/LICENSE.md) for details.
+This project is under the MIT license. See the [LICENSE](https://github.com/zKriguer/products-erp/blob/master/LICENSE.md) for details.
