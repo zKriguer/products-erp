@@ -61,6 +61,7 @@ export const AddProductForm = () => {
   const client = useQueryClient();
 
   const handleCreateProduct = handleSubmit(async (data) => {
+    console.log(data);
     try {
       await addProduct(data);
       await client.refetchQueries({
@@ -101,7 +102,9 @@ export const AddProductForm = () => {
                     />
                   )}
                 />
-                <span>{errors.name?.message}</span>
+                <span className="text-red-600 text-xs">
+                  {errors.name?.message}
+                </span>
               </div>
               <div className="w-full">
                 <Controller
@@ -109,7 +112,7 @@ export const AddProductForm = () => {
                   control={control}
                   render={({ field }) => (
                     <Select
-                      items={categories}
+                      items={categories ?? []}
                       label="Product Type"
                       placeholder="Select a Product Type"
                       className="max-w-xs"
@@ -124,7 +127,9 @@ export const AddProductForm = () => {
                     </Select>
                   )}
                 />
-                <span>{errors.category?.message}</span>
+                <span className="text-red-600 text-xs">
+                  {errors.category?.message}
+                </span>
               </div>
             </div>
 
@@ -141,7 +146,9 @@ export const AddProductForm = () => {
                   />
                 )}
               />
-              <span>{errors.description?.message}</span>
+              <span className="text-red-600 text-xs">
+                {errors.description?.message}
+              </span>
             </div>
 
             <div className="flex gap-2">
@@ -157,7 +164,9 @@ export const AddProductForm = () => {
                     />
                   )}
                 />
-                <span>{errors.color?.message}</span>
+                <span className="text-red-600 text-xs">
+                  {errors.color?.message}
+                </span>
               </div>
 
               <div>
@@ -175,11 +184,21 @@ export const AddProductForm = () => {
                         </div>
                       }
                       {...field}
-                      value={String(field.value)}
+                      value={String(field.value).replace(/[^0-9.]/g, "")}
+                      onChange={(event) => {
+                        const { value } = event.target;
+                        const number = Number(value);
+                        if (Number.isNaN(number)) {
+                          return;
+                        }
+                        field.onChange(number);
+                      }}
                     />
                   )}
                 />
-                <span>{errors.price?.message}</span>
+                <span className="text-red-600 text-xs">
+                  {errors.price?.message}
+                </span>
               </div>
             </div>
 
