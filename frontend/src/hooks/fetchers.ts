@@ -1,3 +1,4 @@
+import { FormSchema } from "@/components/AddProductForm";
 import { Category } from "@/types/Category";
 import { Product } from "@/types/Product";
 import ky from "ky";
@@ -20,4 +21,8 @@ export const getCategories = async () => {
   const response: Category[] = await api.get("categories").json();
 
   return response;
+};
+
+export const addProduct = async (product: FormSchema) => {
+  await api.post("products", { json: product });
 };

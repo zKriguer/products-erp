@@ -21,16 +21,23 @@ import { useGetCategories } from "@/hooks/hooks";
 import ky from "ky";
 import { useQueryClient } from "@tanstack/react-query";
 import { REACT_QUERY_KEYS } from "@/enums/react-query";
+import { toast } from "sonner";
+import { addProduct } from "@/hooks/fetchers";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
   category: z.string().trim().min(1, "Category is required"),
   description: z.string().trim().min(1, "Description is required"),
   color: z.string().trim().min(1, "Color is required"),
-  price: z.string().trim().min(1, "Price is required"),
+  price: z
+    .string()
+    .trim()
+    .min(1, "Price is required")
+    .transform(Number)
+    .refine((value) => value > 0, "Price must be greater than 0"),
 });
 
-type FormSchema = z.output<typeof formSchema>;
+export type FormSchema = z.output<typeof formSchema>;
 
 export const AddProductForm = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -48,20 +55,25 @@ export const AddProductForm = () => {
       category: "",
       description: "",
       color: "",
-      price: "",
+      price: 0,
     },
   });
 
   const client = useQueryClient();
 
   const handleCreateProduct = handleSubmit(async (data) => {
-    await ky.post(process.env.NEXT_PUBLIC_API_URL + "products", {
-      json: { ...data, price: Number(data.price) },
-    });
-    await client.refetchQueries({ queryKey: [REACT_QUERY_KEYS.GET_PRODUCTS] });
-    reset();
+    try {
+      await addProduct(data);
+      await client.refetchQueries({
+        queryKey: [REACT_QUERY_KEYS.GET_PRODUCTS],
+      });
+      reset();
 
-    onOpenChange();
+      toast.success("Product added successfully");
+      onOpenChange();
+    } catch (error) {
+      toast.error("An error occurred while adding the product");
+    }
   });
 
   return (
@@ -157,9 +169,14 @@ export const AddProductForm = () => {
                     <Input
                       label="Product Price"
                       type="number"
-                      min={0}
+                      placeholder="0.00"
+                      startContent={
+                        <div className="pointer-events-none flex items-center">
+                          <span className="text-default-400 text-small">$</span>
+                        </div>
+                      }
                       {...field}
-                      placeholder="Enter your price"
+                      value={String(field.value)}
                     />
                   )}
                 />

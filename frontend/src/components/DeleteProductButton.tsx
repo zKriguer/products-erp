@@ -6,6 +6,7 @@ import { deleteProduct } from "@/hooks/fetchers";
 import { Button, type ButtonProps } from "@nextui-org/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Trash } from "lucide-react";
+import { toast } from "sonner";
 
 type DeleteProductButtonProps = ButtonProps & {
   productId: string;
@@ -25,6 +26,11 @@ export function DeleteProductButton({
       await queryClient.refetchQueries({
         queryKey: [REACT_QUERY_KEYS.GET_PRODUCTS],
       });
+
+      toast.success("Product removed successfully");
+    },
+    onError() {
+      toast.error("An error occurred while removing the product");
     },
   });
 
