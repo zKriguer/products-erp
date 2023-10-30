@@ -18,7 +18,6 @@ import { z } from "zod";
 
 import { useGetCategories } from "@/hooks/hooks";
 
-import ky from "ky";
 import { useQueryClient } from "@tanstack/react-query";
 import { REACT_QUERY_KEYS } from "@/enums/react-query";
 import { toast } from "sonner";
