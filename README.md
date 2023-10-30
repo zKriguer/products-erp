@@ -2,7 +2,7 @@
 
 This monorepo application has two repositories, frontend and backend, built with fastify - Nextjs and Typescript;
 
-## For the Technical Test
+## The Technical Test
 
 For backend:
 
