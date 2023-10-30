@@ -12,7 +12,7 @@ app.register(categoryController);
 app.register(cors, {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://products-erp-frontend.vercel.app/"
+      ? "https://products-erp-frontend.vercel.app"
       : "*",
 });
 
