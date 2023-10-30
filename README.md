@@ -67,6 +67,32 @@ yarn build
 pnpm build
 ```
 
+## With docker (any package manager)
+
+See the .env.example
+
+In the backend directory run:
+
+```
+docker compose up
+```
+
+```
+# For create the tables on docker db
+npm run db:deploy
+```
+
+```
+# For populate the tables with needed data
+npm run db:seed
+```
+
+With docker running, go to the root folder and run:
+
+```
+npm run dev
+```
+
 ## Questions
 
 1. What would be your first improvements if you had more implementation time?

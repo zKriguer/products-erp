@@ -191,7 +191,7 @@ export const AddProductForm = () => {
                         if (Number.isNaN(number)) {
                           return;
                         }
-                        field.onChange(number);
+                        field.onChange(String(number));
                       }}
                     />
                   )}

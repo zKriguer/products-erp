@@ -9,6 +9,7 @@
     "build": "tsup server.ts",
     "start": "node dist/server.js",
     "db:seed": "tsx prisma/seed.ts",
+    "db:deploy": "prisma migrate deploy",
     "postinstall": "prisma generate",
     "clean": "rimraf dist node_modules"
   },
