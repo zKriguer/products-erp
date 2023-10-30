@@ -25,11 +25,11 @@ export const ProductsERP = () => {
       ? productData
           ?.filter((product) => {
             const values = Object.values(product).map((value) =>
-              String(value).toLowerCase()
+              String(value).toLowerCase(),
             );
 
             const filteredProducts = values.some((value) =>
-              value.includes(debouncedSearch)
+              value.includes(debouncedSearch),
             );
 
             if (filters.categories.length > 0) {

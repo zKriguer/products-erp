@@ -15,7 +15,7 @@ const getProducts = async () => {
 
   const productsWithDiscount = products.map((product) => {
     const discount = discounts.find(
-      (discount) => discount.productType === product.category
+      (discount) => discount.productType === product.category,
     );
     const price = Number(product.price);
     const discountValue = Number(discount?.value) || 0;
