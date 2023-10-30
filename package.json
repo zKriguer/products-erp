@@ -1,0 +1,30 @@
+{
+  "name": "ultimate-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rimraf node_modules",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.6",
+    "inquirer": "8",
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/cz-commitlint": "^17.4.2",
+    "husky": "^8.0.0",
+    "prettier": "latest",
+    "rimraf": "^5.0.5",
+    "turbo": "latest",
+    "typescript": "5.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  }
+}
