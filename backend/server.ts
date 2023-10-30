@@ -9,4 +9,4 @@ app.register(productsController);
 app.register(categoryController);
 app.register(cors, { origin: "*" });
 
-await app.listen({ port: 4321 || process.env.PORT, host: "0.0.0.0" });
+await app.listen({ port: Number(process.env.PORT) || 4321, host: "0.0.0.0" });
