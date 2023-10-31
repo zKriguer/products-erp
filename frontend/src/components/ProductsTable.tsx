@@ -23,7 +23,7 @@ export const ProductsTable = ({ products, isLoadingProducts }: Props) => {
       removeWrapper
       isHeaderSticky
       classNames={{
-        base: "max-h-[500px] overflow-scroll bg-zinc-900 p-4 rounded-md min-w-[1200px]",
+        base: "max-h-[500px] overflow-y-scroll bg-zinc-900 p-4 rounded-md min-w-[1200px]",
         td: "hover:bg-zinc-800 rounded-md",
       }}
     >
